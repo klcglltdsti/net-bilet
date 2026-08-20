@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="tr">
+  <head>
+    <meta charset="utf-8" />
+    <title>BULUŞ yönlendiriliyor</title>
+    <script>
+      (function () {
+        var parts = location.pathname.split("/").filter(Boolean);
+        var githubProject = location.hostname.endsWith("github.io");
+        var base = githubProject && parts.length ? "/" + parts.shift() + "/" : "/";
+        var route = "/" + parts.join("/");
+        location.replace(location.origin + base + "#" + route + location.search);
+      })();
+    </script>
+  </head>
+  <body>Siteye yönlendiriliyorsunuz…</body>
+</html>
