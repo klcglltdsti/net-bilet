@@ -1,6 +1,0 @@
-import { EventCard } from "../../components/EventCard";
-import { FollowButton } from "../../components/FollowButton";
-import { SubHeader } from "../../components/SubHeader";
-import { eventRecords } from "../../data/events";
-
-export default function CompanyPage(){return <main className="entity-page"><SubHeader/><section className="entity-cover company-cover"><div className="entity-monogram">BKM</div><span>DOĞRULANMIŞ ORGANİZATÖR</span><h1>BKM Organizasyon</h1><p>1994'ten beri sahnenin arkasında</p><div><strong>482 bin<small>Takipçi</small></strong><strong>326<small>Etkinlik</small></strong><strong>28<small>Şehir</small></strong></div><FollowButton/></section><section className="entity-content"><div className="entity-about"><div><span className="section-kicker">HAKKINDA</span><h2>Türkiye'nin etkinlik hafızası</h2><p>Komedi, tiyatro, müzik ve festival deneyimlerini yeni nesil seyirciyle buluşturan bağımsız etkinlik organizatörü.</p></div><aside><span>Demo firma</span><strong>bkm@bulus.demo</strong><span>Doğrulanmış profil</span><strong>✓ BULUŞ onaylı</strong></aside></div><span className="section-kicker">SATIŞTA</span><h2>Yaklaşan etkinlikler</h2><div className="event-grid">{eventRecords.slice(0,3).map(event=><EventCard event={event} key={event.slug}/>)}</div></section></main>}
