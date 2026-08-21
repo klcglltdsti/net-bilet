@@ -62,3 +62,16 @@ test("81 şehir ve tarayıcı içi API simülasyonu korunur", async () => {
   assert.match(api, /\/api\/v1\/seats\/reserve/);
   assert.match(api, /\/api\/v1\/tickets\/verify/);
 });
+
+test("hibrit NetBilet tasarım dili ana sayfaya uygulanır", async () => {
+  const [home, theme, entry] = await Promise.all([
+    readFile(new URL("app/page.tsx", root), "utf8"),
+    readFile(new URL("app/hybrid-theme.css", root), "utf8"),
+    readFile(new URL("src/main.tsx", root), "utf8"),
+  ]);
+  assert.match(home, /campaign-showcase/);
+  assert.match(home, /Keşfet ve yaşa/);
+  assert.match(theme, /#120b1c/);
+  assert.match(theme, /"Outfit"/);
+  assert.match(entry, /hybrid-theme\.css/);
+});

@@ -19,8 +19,36 @@ const events = [
   { slug: "bir-delinin-hatira-defteri", title: "Bir Delinin Hatıra Defteri", type: "TİYATRO", day: "28", month: "EYL", place: "CSO Ada", city: "Ankara", price: "600 TL", score: "%86 uyum", art: "art-theatre", mark: "PERDE\nAÇILIYOR" },
 ];
 
+const campaigns = [
+  {
+    eyebrow: "YAZ FIRSATI",
+    title: "%20 Yaz indirimi başladı",
+    description: "Seçili açık hava konserlerinde avantajlı biletleri kaçırma.",
+    action: "Kampanyayı keşfet",
+    href: "/discover",
+    tone: "campaign-purple",
+  },
+  {
+    eyebrow: "SAHNE SENİN",
+    title: "Tiyatroda 1 alana 1 hediye",
+    description: "Şehrin sevilen oyunlarında arkadaşınla birlikte yerini ayır.",
+    action: "Oyunları gör",
+    href: "/discover",
+    tone: "campaign-orange",
+  },
+  {
+    eyebrow: "BU HAFTA SONU",
+    title: "Stand-up geceleri başlıyor",
+    description: "Yeni nesil komedyenleri en ön sıradan keşfet.",
+    action: "Biletleri incele",
+    href: "/discover",
+    tone: "campaign-pink",
+  },
+];
+
 export default function Home() {
-  const [category,setCategory]=useState("Tümü"); const [query,setQuery]=useState(""); const [city,setCity]=useState("Ankara"); const [favorites,setFavorites]=useState<string[]>([]);
+  const [category,setCategory]=useState("Tümü"); const [query,setQuery]=useState(""); const [city,setCity]=useState("Ankara"); const [favorites,setFavorites]=useState<string[]>([]); const [campaignIndex,setCampaignIndex]=useState(0);
+  const campaign=campaigns[campaignIndex];
   const visibleEvents=events.filter(event=>(category==="Tümü"||event.type.toLocaleLowerCase("tr-TR")===category.toLocaleLowerCase("tr-TR"))&&`${event.title} ${event.place}`.toLocaleLowerCase("tr-TR").includes(query.toLocaleLowerCase("tr-TR")));
   return (
     <main className="app-shell">
@@ -32,9 +60,9 @@ export default function Home() {
 
       <section className="hero" id="top">
         <div className="hero-copy">
-          <span className="eyebrow">ANKARA'DA BU HAFTA</span>
-          <h1>Plan arama.<br /><em>Anını bul.</em></h1>
-          <p>Şehrindeki en iyi etkinlikleri keşfet, arkadaşlarınla paylaş ve yerini ayırt.</p>
+          <span className="eyebrow">✦ 2026 ETKİNLİK SEZONU</span>
+          <h1>Plan arama.<br /><em>Keşfet ve yaşa.</em></h1>
+          <p>Şehrindeki en iyi etkinlikleri keşfet, arkadaşlarınla paylaş ve unutamayacağın anlarda yerini ayırt.</p>
           <form className="search-box" onSubmit={event=>{event.preventDefault();document.getElementById("etkinlikler")?.scrollIntoView({behavior:"smooth"})}}><span aria-hidden="true">⌕</span><input value={query} onChange={event=>setQuery(event.target.value)} aria-label="Etkinlik ara" placeholder="Etkinlik, sanatçı veya mekan ara" /><button type="submit">Ara</button></form>
           <div className="quick-tags" aria-label="Popüler aramalar"><span>Popüler:</span><a href="#etkinlikler">Stand-up</a><a href="#etkinlikler">Konser</a><a href="#etkinlikler">Bu hafta sonu</a></div>
         </div>
@@ -50,6 +78,12 @@ export default function Home() {
       <section className="stories-section" id="kesfet">
         <div className="section-heading compact-heading"><div><span className="section-kicker">CANLI AKIŞ</span><h2>Şu an neler oluyor?</h2></div><a href="#etkinlikler">Tümünü gör <span>→</span></a></div>
         <div className="stories-row">{stories.map((story) => <a className="story" href={story.href} key={story.name}><span className={`story-ring ${story.tone}`}><b>{story.initials}</b></span><span className="story-name">{story.name}</span>{story.live && <small>YENİ</small>}</a>)}</div>
+      </section>
+
+      <section className={`campaign-showcase ${campaign.tone}`} aria-label="Güncel kampanyalar">
+        <div className="campaign-copy"><span>{campaign.eyebrow}</span><h2>{campaign.title}</h2><p>{campaign.description}</p><a href={campaign.href}>{campaign.action} <b>→</b></a></div>
+        <div className="campaign-art" aria-hidden="true"><span>BULUŞ</span><strong>{campaignIndex === 0 ? "%20" : campaignIndex === 1 ? "1+1" : "HA!"}</strong><i>ŞEHRİN<br />SAHNEDE</i></div>
+        <div className="campaign-controls" aria-label="Kampanya seçimi">{campaigns.map((item,index)=><button type="button" key={item.title} className={index===campaignIndex?"active":""} onClick={()=>setCampaignIndex(index)} aria-label={`${index+1}. kampanyayı göster`} />)}</div>
       </section>
 
       <section className="recommendation" id="neyapayim">
