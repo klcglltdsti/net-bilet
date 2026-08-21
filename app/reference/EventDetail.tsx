@@ -18,6 +18,12 @@ function AccordionItem({ title, children, defaultOpen = false }) {
 
 function EventDetail({ onBack, onCheckout, onViewProfile, event }) {
   useReferenceTheme('event');
+  const eventCategory = String(event?.category || 'Konser').toLocaleLowerCase('tr-TR');
+  const heroImage = eventCategory.includes('tiyatro')
+    ? 'https://images.unsplash.com/photo-1503095396549-807759245b35?auto=format&fit=crop&w=1800&q=86'
+    : eventCategory.includes('stand') || eventCategory.includes('komedi')
+      ? 'https://images.unsplash.com/photo-1527224857830-43a7acc85260?auto=format&fit=crop&w=1800&q=86'
+      : 'https://images.unsplash.com/photo-1501386761578-eac5c94b800a?auto=format&fit=crop&w=1800&q=86';
   // Ticket / Selection States
   const [ticketCount, setTicketCount] = useState(1);
   const [selectedCategory, setSelectedCategory] = useState('Genel Giriş');
@@ -78,7 +84,7 @@ function EventDetail({ onBack, onCheckout, onViewProfile, event }) {
 
       {/* Hero Alanı */}
       <div className="detail-hero">
-        <div className="detail-hero-bg" style={{ backgroundImage: `url('https://picsum.photos/seed/${event?.slug || 'konser'}/1200/600')` }}></div>
+        <div className="detail-hero-bg" style={{ backgroundImage: `url('${heroImage}')` }}></div>
         <div className="detail-hero-content">
           <div className="hero-top-badges">
             <span className="badge category-badge">{event?.category || 'Konser'}</span>
@@ -186,7 +192,7 @@ function EventDetail({ onBack, onCheckout, onViewProfile, event }) {
               <h3 style={{marginBottom: '16px', fontSize: '1.1rem', fontWeight: '600'}}>Sanatçılar / Kadro</h3>
               <div style={{display: 'flex', gap: '16px', overflowX: 'auto', paddingBottom: '8px'}}>
                 <div className="artist-mini-card glass-panel" onClick={() => onViewProfile('artist', 'tarkan')} style={{minWidth: '150px', padding: '16px', cursor: 'pointer', textAlign: 'center', borderRadius: '16px', border: '1px solid var(--glass-border)'}}>
-                  <img src="https://picsum.photos/seed/tarkan-avatar/100/100" style={{width: '80px', height: '80px', borderRadius: '50%', marginBottom: '12px', objectFit: 'cover'}} alt="Tarkan" />
+                  <img src="https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?auto=format&fit=crop&w=200&q=84" style={{width: '80px', height: '80px', borderRadius: '50%', marginBottom: '12px', objectFit: 'cover'}} alt="Sanatçı" />
                   <h4 style={{margin: '0', fontSize: '1rem', color: 'var(--text-main)'}}>Tarkan</h4>
                   <p style={{margin: '4px 0 0', fontSize: '0.8rem', color: 'var(--text-muted)'}}>Pop Müzik</p>
                 </div>
@@ -302,7 +308,7 @@ function EventDetail({ onBack, onCheckout, onViewProfile, event }) {
           {/* Card 1 */}
           <div className="event-card glass-panel">
             <div className="event-image">
-              <img src="https://picsum.photos/seed/konser2/600/400" alt="Concert" />
+              <img src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&w=900&q=82" alt="Kenan Doğulu konseri" />
               <div className="event-badges"><span className="category-badge">Konser</span></div>
             </div>
             <div className="event-info">
@@ -313,7 +319,7 @@ function EventDetail({ onBack, onCheckout, onViewProfile, event }) {
           {/* Card 2 */}
           <div className="event-card glass-panel">
             <div className="event-image">
-              <img src="https://picsum.photos/seed/konser3/600/400" alt="Concert" />
+              <img src="https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?auto=format&fit=crop&w=900&q=82" alt="Sıla konseri" />
               <div className="event-badges"><span className="category-badge">Konser</span></div>
             </div>
             <div className="event-info">
@@ -324,7 +330,7 @@ function EventDetail({ onBack, onCheckout, onViewProfile, event }) {
           {/* Card 3 */}
           <div className="event-card glass-panel">
             <div className="event-image">
-              <img src="https://picsum.photos/seed/konser4/600/400" alt="Concert" />
+              <img src="https://images.unsplash.com/photo-1524368535928-5b5e00ddc76b?auto=format&fit=crop&w=900&q=82" alt="Mabel Matiz konseri" />
               <div className="event-badges"><span className="category-badge">Konser</span></div>
             </div>
             <div className="event-info">

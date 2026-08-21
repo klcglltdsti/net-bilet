@@ -31,6 +31,10 @@ function Checkout({ onBack, onComplete }) {
   const [timeLeft, setTimeLeft] = useState(600); // 10 minutes in seconds
 
   useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'instant' });
+  }, [step]);
+
+  useEffect(() => {
     if (step === 'payment') {
       const timer = setInterval(() => {
         setTimeLeft((prev) => (prev > 0 ? prev - 1 : 0));
@@ -274,7 +278,7 @@ function Checkout({ onBack, onComplete }) {
             <h3 style={{ marginBottom: '24px' }}>Sipariş Özeti</h3>
             
             <div className="event-mini-info">
-              <img src="https://picsum.photos/seed/konser/200/150" alt="event" />
+              <img src="https://images.unsplash.com/photo-1501386761578-eac5c94b800a?auto=format&fit=crop&w=500&q=82" alt="Konser sahnesi" />
               <div>
                 <h4>{event.title}</h4>
                 <p>{event.day} {event.month}, {event.place}</p>

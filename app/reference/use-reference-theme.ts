@@ -8,11 +8,12 @@ import venueCss from "./VenueProfile.css?inline";
 import profileCss from "./Profile.css?inline";
 import integrationCss from "./integration.css?inline";
 import responsiveCss from "./responsive.css?inline";
+import homePolishCss from "./home-polish.css?inline";
 
 export type ReferenceScreen = "home" | "event" | "checkout" | "artist" | "venue" | "profile";
 
 const screenCss: Record<ReferenceScreen, string[]> = {
-  home: [homeCss],
+  home: [],
   event: [detailCss],
   checkout: [detailCss, checkoutCss],
   artist: [homeCss, detailCss, artistCss],
@@ -25,7 +26,7 @@ export function useReferenceTheme(screen: ReferenceScreen = "home") {
     const style = document.createElement("style");
     style.dataset.netbiletReference = "true";
     style.dataset.netbiletScreen = screen;
-    style.textContent = [baseCss, ...screenCss[screen], integrationCss, responsiveCss].join("\n");
+    style.textContent = [baseCss, ...screenCss[screen], integrationCss, responsiveCss, homePolishCss].join("\n");
     document.head.append(style);
     document.body.classList.add("netbilet-reference-page");
     document.body.classList.add(`netbilet-screen-${screen}`);

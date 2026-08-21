@@ -79,7 +79,7 @@ function Profile({ onBack, initialTab = 'tickets' }) {
                 {/* Dijital Bilet Kartı */}
                 <div className="digital-ticket glass-panel">
                   <div className="ticket-visual">
-                    <img src="https://picsum.photos/seed/konser/400/200" alt="event" />
+                    <img src="https://images.unsplash.com/photo-1501386761578-eac5c94b800a?auto=format&fit=crop&w=900&q=82" alt="Konser sahnesi" />
                     <div className="ticket-qr">
                       <QrCode size={48} />
                       <span>Okutmak için tıkla</span>
@@ -123,17 +123,17 @@ function Profile({ onBack, initialTab = 'tickets' }) {
               
               <div className="favorites-grid">
                 <div className="favorite-card glass-panel" onClick={() => navigateTo('/artist/mesut-sure')}>
-                  <img src="https://picsum.photos/seed/tarkan-avatar/150/150" alt="Tarkan" />
+                  <img src="https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?auto=format&fit=crop&w=300&q=82" alt="Tarkan" />
                   <h4>Tarkan</h4>
                   <span className="badge">Sanatçı</span>
                 </div>
                 <div className="favorite-card glass-panel" onClick={() => navigateTo('/venue/milyon-performance-hall')}>
-                  <img src="https://picsum.photos/seed/harbiye/150/150" alt="Harbiye" />
+                  <img src="https://images.unsplash.com/photo-1521337581100-8ca9a73a5f79?auto=format&fit=crop&w=300&q=82" alt="Harbiye" />
                   <h4>Harbiye Açık Hava</h4>
                   <span className="badge">Mekân</span>
                 </div>
                 <div className="favorite-card glass-panel" onClick={() => navigateTo('/event/mesut-sure-iliski-testi')}>
-                  <img src="https://picsum.photos/seed/tiyatro/150/150" alt="Tiyatro" />
+                  <img src="https://images.unsplash.com/photo-1503095396549-807759245b35?auto=format&fit=crop&w=300&q=82" alt="Tiyatro" />
                   <h4>Amadeus</h4>
                   <span className="badge">Etkinlik</span>
                 </div>

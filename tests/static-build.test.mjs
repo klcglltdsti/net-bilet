@@ -64,19 +64,25 @@ test("81 şehir ve tarayıcı içi API simülasyonu korunur", async () => {
 });
 
 test("kullanıcının NetBilet ekranları çalışan rotalara bağlanır", async () => {
-  const [home, baseTheme, homeTheme, responsiveTheme, themeHook, router, checkout] = await Promise.all([
+  const [home, baseTheme, homePolish, responsiveTheme, themeHook, router, checkout] = await Promise.all([
     readFile(new URL("app/page.tsx", root), "utf8"),
     readFile(new URL("app/netbilet-base.css", root), "utf8"),
-    readFile(new URL("app/netbilet-home.css", root), "utf8"),
+    readFile(new URL("app/reference/home-polish.css", root), "utf8"),
     readFile(new URL("app/reference/responsive.css", root), "utf8"),
     readFile(new URL("app/reference/use-reference-theme.ts", root), "utf8"),
     readFile(new URL("src/App.tsx", root), "utf8"),
     readFile(new URL("app/reference/Checkout.tsx", root), "utf8"),
   ]);
-  assert.match(home, /En İyi Etkinlikleri/);
-  assert.match(home, /campaign-banner/);
-  assert.match(baseTheme, /#120b1c/);
-  assert.match(homeTheme, /floating-cards/);
+  assert.match(home, /Şehrin ritmini/);
+  assert.match(home, /hero-category-cloud/);
+  assert.match(home, /Konser/);
+  assert.match(home, /Müzikal/);
+  assert.doesNotMatch(home, /hero-spotlight/);
+  assert.match(home, /home-event-grid/);
+  assert.doesNotMatch(home, /horizontal-scroll-container/);
+  assert.match(baseTheme, /#1a1026/);
+  assert.match(homePolish, /grid-template-columns:repeat\(3,minmax\(0,1fr\)\)/);
+  assert.match(homePolish, /max-width:700px/);
   assert.match(home, /SmartExperience/);
   assert.match(home, /ExperienceHub/);
   assert.match(home, /\/match/);

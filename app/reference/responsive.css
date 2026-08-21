@@ -115,6 +115,9 @@
 .netbilet-screen-event .detail-body{padding:54px clamp(20px,7vw,120px);grid-template-columns:minmax(0,1.5fr) minmax(310px,1fr)}
 .netbilet-screen-event .detail-main-content,.netbilet-screen-event .ticket-purchase{min-width:0}
 .netbilet-screen-event .detail-meta{min-width:0}.netbilet-screen-event .meta-item{min-width:0}.netbilet-screen-event .meta-value{overflow-wrap:anywhere}
+.netbilet-screen-event .events-section{padding-left:clamp(20px,7vw,120px)!important;padding-right:clamp(20px,7vw,120px)!important}
+.netbilet-screen-event .horizontal-scroll-container{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;overflow:visible}
+.netbilet-screen-event .horizontal-scroll-container .event-card{min-width:0;width:100%}
 .netbilet-screen-event .hero-btn.is-favorite{color:#fb7185;border-color:rgba(251,113,133,.5);background:rgba(251,113,133,.12)}
 .netbilet-screen-event .detail-action-notice{margin:18px 0 0;color:#ddd1eb;font-size:.9rem}
 .netbilet-screen-checkout .checkout-page{padding:96px clamp(20px,6vw,100px)}
@@ -138,6 +141,8 @@
 .netbilet-screen-profile .ticket-actions button{white-space:normal}
 .netbilet-screen-profile .toggle-switch{flex:0 0 48px;padding:0;border:0}
 .netbilet-screen-profile .profile-notice{margin:0 0 22px;padding:12px 15px;border:1px solid rgba(16,185,129,.22);border-radius:12px;background:rgba(16,185,129,.08);color:#6ee7b7}
+.netbilet-screen-artist .horizontal-scroll-container{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;overflow:visible}
+.netbilet-screen-artist .artist-mini-card{min-width:0;width:100%}
 .netbilet-screen-artist .profile-body,.netbilet-screen-venue .profile-body{padding:52px clamp(20px,7vw,110px)!important}
 .netbilet-screen-artist .profile-body .events-section{padding:0}
 .netbilet-screen-artist .profile-title,.netbilet-screen-venue .profile-title{font-size:clamp(2.5rem,5vw,4rem);overflow-wrap:anywhere}
@@ -204,8 +209,10 @@
   .netbilet-screen-event .selection-grid{grid-template-columns:1fr}
   .netbilet-screen-checkout .checkout-page{padding:78px 12px 32px}
   .netbilet-screen-checkout .seat-selection-area,.netbilet-screen-checkout .checkout-form,.netbilet-screen-checkout .sticky-summary{padding:20px;border-radius:22px}
-  .netbilet-screen-checkout .seat-row{justify-content:flex-start;gap:8px;min-width:max-content}
-  .netbilet-screen-checkout .seats{gap:5px}.netbilet-screen-checkout .seat{width:34px;height:34px;font-size:.75rem}
+  .netbilet-screen-checkout .seating-map{overflow-x:hidden}
+  .netbilet-screen-checkout .seat-row{justify-content:center;gap:6px;min-width:0}
+  .netbilet-screen-checkout .row-label{width:15px;font-size:.78rem}
+  .netbilet-screen-checkout .seats{gap:3px}.netbilet-screen-checkout .seat{width:24px;height:28px;font-size:.68rem;border-radius:6px 6px 3px 3px}
   .netbilet-screen-checkout .seat-legend{flex-wrap:wrap;gap:12px}
   .netbilet-screen-checkout .form-row{flex-direction:column;gap:0}
   .netbilet-screen-profile .profile-page{padding:78px 12px 34px}
@@ -223,6 +230,7 @@
   .netbilet-screen-artist .profile-title,.netbilet-screen-venue .profile-title{font-size:clamp(2.3rem,11vw,3.4rem)}
   .netbilet-screen-artist .profile-bio,.netbilet-screen-venue .profile-bio{font-size:1rem}
   .netbilet-screen-artist .profile-body,.netbilet-screen-venue .profile-body{padding:38px 14px!important}
+  .netbilet-screen-event .horizontal-scroll-container,.netbilet-screen-artist .horizontal-scroll-container{grid-template-columns:1fr}
   .netbilet-screen-artist .events-grid{grid-template-columns:1fr}
   .netbilet-screen-venue .venue-meta{flex-direction:column;align-items:stretch}.netbilet-screen-venue .venue-meta span{justify-content:center}
   .netbilet-screen-venue .feature-card{padding:19px;gap:15px}

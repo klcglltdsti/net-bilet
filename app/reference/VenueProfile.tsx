@@ -14,7 +14,7 @@ function VenueProfile({ onBack, onEventSelect }) {
 
       {/* Hero Alanı */}
       <div className="profile-hero venue-hero">
-        <div className="profile-hero-bg" style={{ backgroundImage: `url('https://picsum.photos/seed/harbiye/1200/600')` }}></div>
+        <div className="profile-hero-bg" style={{ backgroundImage: `url('https://images.unsplash.com/photo-1521337581100-8ca9a73a5f79?auto=format&fit=crop&w=1800&q=86')` }}></div>
         <div className="profile-hero-content">
           <div className="profile-info">
             <span className="badge category-badge" style={{marginBottom: '12px'}}>Açık Hava Sahnesi</span>
@@ -84,7 +84,7 @@ function VenueProfile({ onBack, onEventSelect }) {
               {/* Kart 1 */}
               <div className="event-card glass-panel" onClick={onEventSelect}>
                 <div className="event-image">
-                  <img src="https://picsum.photos/seed/konser1/600/400" alt="Concert" />
+                  <img src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&w=900&q=82" alt="Yaz akşamı konseri" />
                   <div className="event-badges"><span className="category-badge">Konser</span></div>
                   <div className="event-date"><span className="day">15</span><span className="month">AĞU</span></div>
                 </div>
@@ -100,7 +100,7 @@ function VenueProfile({ onBack, onEventSelect }) {
               {/* Kart 2 */}
               <div className="event-card glass-panel" onClick={onEventSelect}>
                 <div className="event-image">
-                  <img src="https://picsum.photos/seed/konser2/600/400" alt="Concert" />
+                  <img src="https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?auto=format&fit=crop&w=900&q=82" alt="Kenan Doğulu konseri" />
                   <div className="event-badges"><span className="category-badge">Konser</span></div>
                   <div className="event-date"><span className="day">16</span><span className="month">AĞU</span></div>
                 </div>
