@@ -1,0 +1,114 @@
+:root {
+  /* Rich Color Palette */
+  --bg-dark: #120b1c; /* Very dark rich purple instead of pure black */
+  --bg-card: #1c132c; /* Slightly lighter for cards */
+  --bg-card-hover: #261a3c;
+  
+  --text-main: #f4eefa;
+  --text-muted: #a395b7;
+  
+  --primary: #8b5cf6; /* Vibrant Purple */
+  --primary-glow: rgba(139, 92, 246, 0.4);
+  
+  --secondary: #f97316; /* Vibrant Orange */
+  --secondary-glow: rgba(249, 115, 22, 0.4);
+
+  --accent: #d946ef; /* Fuchsia */
+  
+  --glass-bg: rgba(28, 19, 44, 0.4);
+  --glass-border: rgba(255, 255, 255, 0.05);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Outfit', sans-serif;
+}
+
+body {
+  background-color: var(--bg-dark);
+  color: var(--text-main);
+  overflow-x: hidden;
+  background-image: 
+    radial-gradient(circle at 15% 50%, rgba(139, 92, 246, 0.08) 0%, transparent 50%),
+    radial-gradient(circle at 85% 30%, rgba(249, 115, 22, 0.08) 0%, transparent 50%);
+  background-attachment: fixed;
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+ul {
+  list-style: none;
+}
+
+/* Glassmorphism Utilities */
+.glass-panel {
+  background: var(--glass-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--glass-border);
+  border-radius: 16px;
+}
+
+/* Buttons */
+.btn-primary {
+  background: linear-gradient(135deg, var(--primary), var(--accent));
+  color: #fff;
+  border: none;
+  padding: 12px 28px;
+  border-radius: 30px;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px var(--primary-glow);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 6px 20px var(--primary-glow);
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--text-main);
+  border: 1px solid var(--glass-border);
+  padding: 12px 28px;
+  border-radius: 30px;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(8px);
+}
+
+.btn-outline:hover {
+  background: var(--glass-bg);
+  border-color: var(--primary);
+  color: #fff;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-dark);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--bg-card-hover);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--primary);
+}

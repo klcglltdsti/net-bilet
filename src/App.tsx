@@ -8,10 +8,8 @@ import AdminOrganizersPage from "../app/admin/organizers/page";
 import AdminSettingsPage from "../app/admin/settings/page";
 import AdminSupportPage from "../app/admin/support/page";
 import AdminUsersPage from "../app/admin/users/page";
-import ArtistPage from "../app/artist/mesut-sure/page";
 import LoginPage from "../app/auth/login/page";
 import RegisterPage from "../app/auth/register/page";
-import CheckoutPage from "../app/checkout/page";
 import CompanyPage from "../app/company/bkm/page";
 import DiscoverPage from "../app/discover/page";
 import MatchPage from "../app/match/page";
@@ -27,13 +25,15 @@ import OrganizerReportsPage from "../app/organizer/reports/page";
 import OrganizerSalesPage from "../app/organizer/sales/page";
 import OrganizerTeamPage from "../app/organizer/team/page";
 import OrganizerTicketsPage from "../app/organizer/tickets/page";
-import ProfilePage from "../app/profile/page";
 import RewardsPage from "../app/rewards/page";
 import SupportPage from "../app/support/page";
 import TicketsPage from "../app/tickets/page";
-import VenuePage from "../app/venue/milyon-performance-hall/page";
 import { DemoEventExperience } from "../app/demo-event/[slug]/DemoEventExperience";
-import { EventExperience } from "../app/event/[slug]/EventExperience";
+import ReferenceArtistProfile from "../app/reference/ArtistProfile";
+import ReferenceCheckout from "../app/reference/Checkout";
+import ReferenceEventDetail from "../app/reference/EventDetail";
+import ReferenceProfile from "../app/reference/Profile";
+import ReferenceVenueProfile from "../app/reference/VenueProfile";
 import { findEvent } from "../app/data/events";
 import { currentRoute, navigateTo } from "./router";
 
@@ -47,10 +47,10 @@ const exactRoutes: Record<string, () => React.JSX.Element> = {
   "/admin/settings": AdminSettingsPage,
   "/admin/support": AdminSupportPage,
   "/admin/users": AdminUsersPage,
-  "/artist/mesut-sure": ArtistPage,
+  "/artist/mesut-sure": () => <ReferenceArtistProfile onBack={() => navigateTo("/")} onEventSelect={() => navigateTo("/event/mabel-matiz-fatih-turnesi")} />,
   "/auth/login": LoginPage,
   "/auth/register": RegisterPage,
-  "/checkout": CheckoutPage,
+  "/checkout": () => <ReferenceCheckout onBack={() => navigateTo("/event/mabel-matiz-fatih-turnesi")} onComplete={() => navigateTo("/tickets")} />,
   "/company/bkm": CompanyPage,
   "/discover": DiscoverPage,
   "/match": MatchPage,
@@ -66,11 +66,11 @@ const exactRoutes: Record<string, () => React.JSX.Element> = {
   "/organizer/sales": OrganizerSalesPage,
   "/organizer/team": OrganizerTeamPage,
   "/organizer/tickets": OrganizerTicketsPage,
-  "/profile": ProfilePage,
+  "/profile": () => <ReferenceProfile onBack={() => navigateTo("/")} />,
   "/rewards": RewardsPage,
   "/support": SupportPage,
   "/tickets": TicketsPage,
-  "/venue/milyon-performance-hall": VenuePage,
+  "/venue/milyon-performance-hall": () => <ReferenceVenueProfile onBack={() => navigateTo("/")} onEventSelect={() => navigateTo("/event/mabel-matiz-fatih-turnesi")} />,
 };
 
 const pageTitles: Record<string, string> = {
@@ -97,7 +97,8 @@ function RouteContent({ route }: { route: string }) {
     return <DemoEventExperience slug={decodeURIComponent(path.slice("/demo-event/".length))} />;
   }
   if (path.startsWith("/event/")) {
-    return <EventExperience event={findEvent(decodeURIComponent(path.slice("/event/".length)))} />;
+    const slug = decodeURIComponent(path.slice("/event/".length));
+    return <ReferenceEventDetail event={findEvent(slug)} onBack={() => navigateTo("/")} onCheckout={() => navigateTo(`/checkout?event=${encodeURIComponent(slug)}`)} onViewProfile={(type: string) => navigateTo(type === "artist" ? "/artist/mesut-sure" : "/venue/milyon-performance-hall")} />;
   }
 
   return (

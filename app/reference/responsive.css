@@ -1,0 +1,242 @@
+.netbilet-reference-page img{display:block;max-width:100%}
+.netbilet-reference-page button,.netbilet-reference-page a,.netbilet-reference-page input,.netbilet-reference-page select{min-width:0}
+.netbilet-reference-page .back-btn{position:absolute;top:28px;left:28px;width:48px;height:48px;border-radius:50%;display:grid;place-items:center;border:1px solid var(--glass-border);color:var(--text-main);cursor:pointer;z-index:120}
+.netbilet-reference-page .back-btn:hover{background:var(--primary);border-color:var(--primary)}
+
+/* Ana sayfa: referans görünüm korunurken sabit ölçüler akışkan hale getirildi. */
+.netbilet-screen-home .navbar{
+  width:min(1440px,calc(100% - 40px));
+  margin:18px 0 0;
+  left:50%;
+  right:auto;
+  transform:translateX(-50%);
+  padding:14px clamp(18px,2.4vw,36px);
+  gap:24px;
+}
+.netbilet-screen-home .navbar-left,.netbilet-screen-home .nav-actions{flex-shrink:0}
+.netbilet-screen-home .nav-links{gap:clamp(14px,1.8vw,28px);white-space:nowrap}
+.netbilet-screen-home .nav-actions{gap:10px}
+.netbilet-screen-home .nav-actions .btn-outline{padding:9px 14px;border-radius:999px}
+.netbilet-screen-home .nav-login{padding:9px 15px;gap:7px}
+.netbilet-screen-home .nav-notification{position:relative}
+.netbilet-screen-home .nav-notification i{position:absolute;right:4px;top:3px;width:7px;height:7px;border-radius:50%;background:var(--secondary);box-shadow:0 0 0 3px var(--bg-card)}
+.netbilet-screen-home .hero-section{
+  width:min(1600px,100%);
+  min-height:840px;
+  margin:0 auto;
+  padding:150px clamp(24px,6vw,100px) 88px;
+  display:grid;
+  grid-template-columns:minmax(0,1.2fr) minmax(430px,.8fr);
+  gap:clamp(28px,5vw,82px);
+  overflow:hidden;
+}
+.netbilet-screen-home .hero-content{max-width:780px;margin-top:0;min-width:0}
+.netbilet-screen-home .hero-title{font-size:clamp(3rem,5.2vw,4.8rem);overflow-wrap:anywhere}
+.netbilet-screen-home .hero-subtitle{max-width:660px;margin-bottom:28px;font-size:clamp(1rem,1.3vw,1.16rem)}
+.netbilet-screen-home .mouse-glow{background:radial-gradient(600px circle at 35% 35%,rgba(139,92,246,.12),transparent 42%)}
+.netbilet-screen-home .search-bar{position:relative;width:100%;min-height:66px}
+.netbilet-screen-home .search-main-input{flex:2 1 330px}
+.netbilet-screen-home .city-search{flex:0 1 190px}
+.netbilet-screen-home .city-search select{width:100%;border:0;outline:0;background:transparent;color:var(--text-main);font:inherit;cursor:pointer}
+.netbilet-screen-home .city-search option{background:var(--bg-card);color:var(--text-main)}
+.netbilet-screen-home .autocomplete-dropdown{position:absolute;top:calc(100% + 12px);left:0;right:0;padding:22px;border-radius:18px;z-index:100;display:grid;grid-template-columns:1fr 1fr;gap:28px;text-align:left;background:rgba(28,19,44,.98);border:1px solid rgba(255,255,255,.1);box-shadow:0 18px 44px rgba(0,0,0,.55)}
+.netbilet-screen-home .autocomplete-dropdown h4{margin-bottom:12px}
+.netbilet-screen-home .autocomplete-dropdown ul{display:grid;gap:9px}
+.netbilet-screen-home .autocomplete-dropdown a{display:flex;align-items:center;gap:8px;color:var(--text-muted);padding:6px 0}
+.netbilet-screen-home .trending-tags{margin-top:24px;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.netbilet-screen-home .trending-tags>span{color:var(--text-muted);font-size:.9rem}
+.netbilet-screen-home .trending-tags .badge{margin:0;padding:6px 11px;font-size:.8rem;color:var(--text-main)}
+.netbilet-screen-home .app-downloads{margin-top:30px;flex-wrap:wrap}
+.netbilet-screen-home .floating-cards{
+  width:100%;
+  max-width:560px;
+  height:auto;
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:20px;
+  align-self:center;
+  perspective:none;
+}
+.netbilet-screen-home .category-float-link{display:block;min-width:0;will-change:transform}
+.netbilet-screen-home .category-float-link:nth-child(even){margin-top:34px}
+.netbilet-screen-home .float-card{width:100%;padding:10px;border-radius:22px}
+.netbilet-screen-home .float-card img{width:100%;height:clamp(105px,11vw,145px);border-radius:15px}
+.netbilet-screen-home .float-card .card-info{padding:13px 6px 7px;text-align:center}
+.netbilet-screen-home .float-card .card-info h4{margin:0;font-size:clamp(1rem,1.3vw,1.28rem);color:var(--text-main)}
+.netbilet-screen-home .campaign-banner-section{width:min(1440px,100%);margin:0 auto;padding:28px clamp(20px,6vw,86px)}
+.netbilet-screen-home .campaign-banner{padding:clamp(36px,5vw,64px);min-height:300px;gap:30px}
+.netbilet-screen-home .campaign-content{max-width:720px;position:relative;z-index:2}
+.netbilet-screen-home .campaign-content h2{font-size:clamp(2.1rem,4vw,3.4rem)}
+.netbilet-screen-home .campaign-banner .btn-large{position:relative;z-index:2;flex-shrink:0}
+.netbilet-screen-home .events-section,.netbilet-screen-home .experience-hub{width:min(1440px,100%);margin:0 auto;padding:54px clamp(20px,6vw,86px) 18px}
+.netbilet-screen-home .events-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}
+.netbilet-screen-home .event-card{min-width:0;height:100%;cursor:default}
+.netbilet-screen-home .event-info{min-width:0}
+.netbilet-screen-home .event-info h3,.netbilet-screen-home .event-price{overflow-wrap:anywhere}
+.netbilet-screen-home .horizontal-scroll-container .event-card{min-width:min(340px,82vw)}
+
+/* Akıllı öneri ve çalışan ürün özellikleri. */
+.netbilet-screen-home .smart-experience{
+  width:min(1270px,calc(100% - 40px));
+  margin:68px auto 32px;
+  padding:clamp(34px,5vw,66px);
+  display:grid;
+  grid-template-columns:minmax(0,1fr) minmax(420px,.9fr);
+  gap:clamp(34px,6vw,90px);
+  align-items:center;
+  border:1px solid rgba(255,255,255,.1);
+  border-radius:34px;
+  background:linear-gradient(125deg,#24133b,#4c1d95 55%,#7c3aed);
+  box-shadow:0 30px 70px rgba(0,0,0,.26);
+}
+.netbilet-screen-home .smart-copy>span{display:inline-flex;align-items:center;gap:7px;color:#fdba74;font-size:.78rem;font-weight:800;letter-spacing:.12em}
+.netbilet-screen-home .smart-copy h2{margin:14px 0 16px;font-size:clamp(2.2rem,4.4vw,4.2rem);line-height:.98;letter-spacing:-.045em}
+.netbilet-screen-home .smart-copy p{max-width:560px;margin-bottom:26px;color:#d6c9e5;font-size:1.05rem;line-height:1.65}
+.netbilet-screen-home .smart-copy .btn-primary{width:fit-content;gap:9px;background:linear-gradient(135deg,var(--secondary),#ea580c)}
+.netbilet-screen-home .match-preview{padding:22px;border-radius:26px;background:rgba(18,11,28,.82);min-width:0}
+.netbilet-screen-home .match-preview>small{color:var(--text-muted);font-weight:800;letter-spacing:.1em}
+.netbilet-screen-home .match-options-preview{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:16px 0}
+.netbilet-screen-home .match-options-preview>div{display:flex;min-width:0;min-height:140px;padding:15px 8px;flex-direction:column;align-items:center;justify-content:center;border:1px solid rgba(255,255,255,.07);border-radius:18px;background:rgba(255,255,255,.035);text-align:center}
+.netbilet-screen-home .match-options-preview b{font-size:2rem}.netbilet-screen-home .match-options-preview span{margin:8px 0 3px;color:var(--text-muted);font-size:.66rem;font-weight:800}.netbilet-screen-home .match-options-preview strong{font-size:.88rem;overflow-wrap:anywhere}
+.netbilet-screen-home .match-preview>a{display:flex;align-items:center;gap:12px;padding:16px;border-radius:17px;background:linear-gradient(135deg,rgba(139,92,246,.28),rgba(249,115,22,.18));color:#fff}
+.netbilet-screen-home .match-preview>a>span{display:flex;min-width:0;flex:1;flex-direction:column}.netbilet-screen-home .match-preview>a small{color:#c4b5fd;font-size:.66rem;font-weight:800}.netbilet-screen-home .match-preview>a strong{overflow-wrap:anywhere}
+.netbilet-screen-home .experience-hub .section-header>div{min-width:0}
+.netbilet-screen-home .hub-kicker{display:block;margin-bottom:9px;color:var(--secondary);font-size:.78rem;font-weight:800;letter-spacing:.13em}
+.netbilet-screen-home .experience-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.netbilet-screen-home .experience-card{display:grid;grid-template-columns:48px minmax(0,1fr) 24px;align-items:center;gap:15px;padding:23px;border-radius:22px;transition:transform .25s ease,border-color .25s ease,background .25s ease}
+.netbilet-screen-home .experience-card:hover{transform:translateY(-4px);border-color:rgba(255,255,255,.18);background:rgba(255,255,255,.065)}
+.netbilet-screen-home .experience-card>i{width:48px;height:48px;display:grid;place-items:center;border-radius:15px;color:#fff;background:rgba(139,92,246,.18)}
+.netbilet-screen-home .experience-card.orange>i{background:rgba(249,115,22,.18);color:#fb923c}.netbilet-screen-home .experience-card.pink>i{background:rgba(217,70,239,.18);color:#e879f9}.netbilet-screen-home .experience-card.green>i{background:rgba(16,185,129,.16);color:#34d399}.netbilet-screen-home .experience-card.blue>i{background:rgba(59,130,246,.16);color:#60a5fa}
+.netbilet-screen-home .experience-card h3{margin:0 0 6px;font-size:1.08rem}.netbilet-screen-home .experience-card p{margin:0;color:var(--text-muted);font-size:.87rem;line-height:1.5}.netbilet-screen-home .experience-arrow{color:var(--text-muted)}
+
+/* Etkinlik, ödeme ve profil ekranlarının ortak akışkan düzeni. */
+.netbilet-screen-event .detail-hero{padding-left:clamp(24px,7vw,120px);padding-right:clamp(24px,7vw,120px)}
+.netbilet-screen-event .detail-title{font-size:clamp(2.4rem,5vw,4rem);overflow-wrap:anywhere}
+.netbilet-screen-event .detail-body{padding:54px clamp(20px,7vw,120px);grid-template-columns:minmax(0,1.5fr) minmax(310px,1fr)}
+.netbilet-screen-event .detail-main-content,.netbilet-screen-event .ticket-purchase{min-width:0}
+.netbilet-screen-event .detail-meta{min-width:0}.netbilet-screen-event .meta-item{min-width:0}.netbilet-screen-event .meta-value{overflow-wrap:anywhere}
+.netbilet-screen-event .hero-btn.is-favorite{color:#fb7185;border-color:rgba(251,113,133,.5);background:rgba(251,113,133,.12)}
+.netbilet-screen-event .detail-action-notice{margin:18px 0 0;color:#ddd1eb;font-size:.9rem}
+.netbilet-screen-checkout .checkout-page{padding:96px clamp(20px,6vw,100px)}
+.netbilet-screen-checkout .checkout-container{grid-template-columns:minmax(0,2fr) minmax(300px,1.1fr);gap:30px}
+.netbilet-screen-checkout .checkout-main-section,.netbilet-screen-checkout .sticky-summary{min-width:0}
+.netbilet-screen-checkout .form-row>*{min-width:0}
+.netbilet-screen-checkout .demo-payment-tools{margin-bottom:24px;padding:18px;border:1px solid rgba(139,92,246,.25);border-radius:18px;background:rgba(139,92,246,.07)}
+.netbilet-screen-checkout .demo-mode-note{margin-bottom:18px;color:#c4b5fd;font-size:.88rem;line-height:1.5}
+.netbilet-screen-checkout .form-group select{width:100%;padding:15px 18px;border:1px solid var(--glass-border);border-radius:12px;outline:0;background:#1c132c;color:var(--text-main);font:inherit}
+.netbilet-screen-checkout .coupon-row>label{display:block;margin-bottom:8px;color:var(--text-muted);font-size:.9rem;font-weight:500}
+.netbilet-screen-checkout .coupon-row>div{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px}
+.netbilet-screen-checkout .coupon-row input{width:100%;padding:14px 16px;border:1px solid var(--glass-border);border-radius:12px;background:rgba(255,255,255,.035);color:var(--text-main);font:inherit;text-transform:uppercase}
+.netbilet-screen-checkout .coupon-row button{padding:0 18px;border:0;border-radius:12px;background:var(--primary);color:#fff;font-weight:700;cursor:pointer}
+.netbilet-screen-checkout .coupon-row small{display:block;margin-top:9px;color:#34d399}
+.netbilet-screen-checkout .demo-payment-error{margin-top:16px;padding:13px 15px;border:1px solid rgba(239,68,68,.28);border-radius:12px;background:rgba(239,68,68,.1);color:#fca5a5;line-height:1.45}
+.netbilet-screen-checkout .discount-row{color:#34d399}.netbilet-screen-checkout .installment-note{display:block;margin-top:10px;text-align:right;color:var(--text-muted)}
+.netbilet-screen-profile .profile-page{padding:96px clamp(20px,6vw,100px)}
+.netbilet-screen-profile .profile-container{grid-template-columns:minmax(240px,280px) minmax(0,1fr);gap:28px}
+.netbilet-screen-profile .profile-content,.netbilet-screen-profile .ticket-details{min-width:0}
+.netbilet-screen-profile .ticket-actions{flex-wrap:wrap}
+.netbilet-screen-profile .ticket-actions button{white-space:normal}
+.netbilet-screen-profile .toggle-switch{flex:0 0 48px;padding:0;border:0}
+.netbilet-screen-profile .profile-notice{margin:0 0 22px;padding:12px 15px;border:1px solid rgba(16,185,129,.22);border-radius:12px;background:rgba(16,185,129,.08);color:#6ee7b7}
+.netbilet-screen-artist .profile-body,.netbilet-screen-venue .profile-body{padding:52px clamp(20px,7vw,110px)!important}
+.netbilet-screen-artist .profile-body .events-section{padding:0}
+.netbilet-screen-artist .profile-title,.netbilet-screen-venue .profile-title{font-size:clamp(2.5rem,5vw,4rem);overflow-wrap:anywhere}
+.netbilet-screen-artist .artist-notice,.netbilet-screen-venue .artist-notice{margin-top:15px;width:fit-content;padding:9px 12px;border-radius:10px;background:rgba(139,92,246,.14);color:#ddd1eb}
+.netbilet-screen-venue .venue-details-grid{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:40px}
+
+@media(max-width:1180px){
+  .netbilet-screen-home .nav-links{display:none!important}
+  .netbilet-screen-home .hero-section{grid-template-columns:minmax(0,1fr) minmax(370px,.78fr);gap:32px}
+  .netbilet-screen-home .events-grid,.netbilet-screen-home .experience-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+
+@media(max-width:992px){
+  .netbilet-screen-home .navbar{width:calc(100% - 28px);margin-top:12px}
+  .netbilet-screen-home .hero-section{min-height:auto;padding-top:124px;grid-template-columns:1fr;gap:46px}
+  .netbilet-screen-home .hero-content{max-width:850px}
+  .netbilet-screen-home .floating-cards{max-width:none;grid-template-columns:repeat(3,minmax(0,1fr))}
+  .netbilet-screen-home .category-float-link:nth-child(even){margin-top:0}
+  .netbilet-screen-home .category-float-link:nth-child(3n+2){margin-top:28px}
+  .netbilet-screen-home .smart-experience{grid-template-columns:1fr;width:calc(100% - 32px)}
+  .netbilet-screen-event .detail-body,.netbilet-screen-checkout .checkout-container,.netbilet-screen-profile .profile-container,.netbilet-screen-venue .venue-details-grid{grid-template-columns:1fr}
+  .netbilet-screen-event .ticket-purchase,.netbilet-screen-checkout .sticky-summary,.netbilet-screen-profile .profile-sidebar{position:static;top:auto}
+  .netbilet-screen-profile .profile-sidebar{display:grid;grid-template-columns:1fr 1.5fr;gap:16px;align-items:start}
+  .netbilet-screen-profile .user-info{margin:0}.netbilet-screen-profile .logout-btn{margin-top:12px}
+  .netbilet-screen-artist .profile-hero,.netbilet-screen-venue .profile-hero{height:auto;min-height:560px;padding-top:110px}
+  .netbilet-screen-artist .profile-hero-content,.netbilet-screen-venue .profile-hero-content{align-items:center}
+}
+
+@media(max-width:720px){
+  .netbilet-reference-page .back-btn{position:fixed;top:16px;left:16px;width:42px;height:42px;background:rgba(18,11,28,.88);backdrop-filter:blur(12px)}
+  .netbilet-screen-home .logo{font-size:1.3rem}
+  .netbilet-screen-home .hero-section{padding:110px 18px 54px}
+  .netbilet-screen-home .hero-title{font-size:clamp(2.65rem,13vw,4rem);letter-spacing:-.045em}
+  .netbilet-screen-home .hero-subtitle{font-size:1rem}
+  .netbilet-screen-home .search-bar{min-height:0}
+  .netbilet-screen-home .search-input-group{width:100%;padding:0 14px}
+  .netbilet-screen-home .autocomplete-dropdown{grid-template-columns:1fr;gap:14px;top:calc(100% + 8px);padding:18px}
+  .netbilet-screen-home .trending-tags{margin-top:20px}
+  .netbilet-screen-home .app-downloads{display:grid;grid-template-columns:1fr 1fr;gap:10px;width:100%}
+  .netbilet-screen-home .store-btn{width:100%;padding:11px 14px;gap:10px;justify-content:center}
+  .netbilet-screen-home .campaign-banner-section{padding:20px 14px}
+  .netbilet-screen-home .campaign-banner{min-height:360px;padding:34px 22px 58px}
+  .netbilet-screen-home .campaign-content h2{font-size:2.25rem}
+  .netbilet-screen-home .campaign-banner .btn-large{padding:15px 23px;font-size:1rem}
+  .netbilet-screen-home .smart-experience{width:calc(100% - 28px);margin-top:42px;padding:30px 20px;border-radius:26px}
+  .netbilet-screen-home .smart-copy h2{font-size:2.6rem}
+  .netbilet-screen-home .match-preview{padding:16px}
+  .netbilet-screen-home .match-options-preview>div{min-height:116px;padding:11px 5px}
+  .netbilet-screen-home .events-section,.netbilet-screen-home .experience-hub{padding:42px 16px 12px}
+  .netbilet-screen-home .section-header h2{font-size:clamp(1.8rem,8vw,2.35rem)}
+  .netbilet-screen-home .events-grid,.netbilet-screen-home .experience-grid{grid-template-columns:1fr}
+  .netbilet-screen-home .horizontal-scroll-container .event-card{min-width:min(300px,84vw)}
+  .netbilet-screen-home .experience-card{padding:19px;grid-template-columns:44px minmax(0,1fr) 20px}
+  .netbilet-screen-home .experience-card>i{width:44px;height:44px}
+  .netbilet-screen-home .footer-content{padding:46px 20px!important;grid-template-columns:1fr 1fr!important;gap:28px!important}
+  .netbilet-screen-home .footer-content>div:first-child{grid-column:1/-1}
+  .netbilet-screen-event .detail-hero{min-height:620px;padding:100px 18px 34px;border-radius:0 0 26px 26px}
+  .netbilet-screen-event .detail-hero-bottom,.netbilet-screen-event .hero-actions{width:100%}
+  .netbilet-screen-event .detail-meta{width:100%;display:grid;grid-template-columns:1fr}
+  .netbilet-screen-event .meta-item{width:100%;padding:14px 16px}
+  .netbilet-screen-event .hero-actions{flex-wrap:wrap;align-items:center}.netbilet-screen-event .price-tag{align-items:flex-start;margin-right:auto}
+  .netbilet-screen-event .detail-body{padding:34px 14px;gap:24px}
+  .netbilet-screen-event .selection-module,.netbilet-screen-event .ticket-purchase{padding:21px;border-radius:22px}
+  .netbilet-screen-event .selection-grid{grid-template-columns:1fr}
+  .netbilet-screen-checkout .checkout-page{padding:78px 12px 32px}
+  .netbilet-screen-checkout .seat-selection-area,.netbilet-screen-checkout .checkout-form,.netbilet-screen-checkout .sticky-summary{padding:20px;border-radius:22px}
+  .netbilet-screen-checkout .seat-row{justify-content:flex-start;gap:8px;min-width:max-content}
+  .netbilet-screen-checkout .seats{gap:5px}.netbilet-screen-checkout .seat{width:34px;height:34px;font-size:.75rem}
+  .netbilet-screen-checkout .seat-legend{flex-wrap:wrap;gap:12px}
+  .netbilet-screen-checkout .form-row{flex-direction:column;gap:0}
+  .netbilet-screen-profile .profile-page{padding:78px 12px 34px}
+  .netbilet-screen-profile .profile-sidebar{display:block;padding:20px;border-radius:22px}
+  .netbilet-screen-profile .sidebar-menu{display:grid;grid-template-columns:1fr 1fr}
+  .netbilet-screen-profile .menu-item{padding:12px;font-size:.88rem}
+  .netbilet-screen-profile .profile-content{padding:20px;border-radius:22px;min-height:0}
+  .netbilet-screen-profile .digital-ticket{border-radius:18px}.netbilet-screen-profile .ticket-details{padding:20px}
+  .netbilet-screen-profile .ticket-actions{display:grid;grid-template-columns:1fr}
+  .netbilet-screen-profile .past-ticket-item{align-items:flex-start;flex-direction:column;gap:16px}
+  .netbilet-screen-profile .form-row{flex-direction:column;gap:0}
+  .netbilet-screen-profile .notification-toggle{gap:16px}.netbilet-screen-profile .toggle-switch{flex:0 0 48px}
+  .netbilet-screen-artist .profile-hero,.netbilet-screen-venue .profile-hero{min-height:640px;padding:90px 18px 38px}
+  .netbilet-screen-artist .profile-avatar img{width:145px;height:145px}
+  .netbilet-screen-artist .profile-title,.netbilet-screen-venue .profile-title{font-size:clamp(2.3rem,11vw,3.4rem)}
+  .netbilet-screen-artist .profile-bio,.netbilet-screen-venue .profile-bio{font-size:1rem}
+  .netbilet-screen-artist .profile-body,.netbilet-screen-venue .profile-body{padding:38px 14px!important}
+  .netbilet-screen-artist .events-grid{grid-template-columns:1fr}
+  .netbilet-screen-venue .venue-meta{flex-direction:column;align-items:stretch}.netbilet-screen-venue .venue-meta span{justify-content:center}
+  .netbilet-screen-venue .feature-card{padding:19px;gap:15px}
+}
+
+@media(max-width:430px){
+  .netbilet-screen-home .app-downloads{grid-template-columns:1fr}
+  .netbilet-screen-home .match-options-preview{grid-template-columns:1fr}
+  .netbilet-screen-home .match-options-preview>div{min-height:90px}
+  .netbilet-screen-home .footer-content{grid-template-columns:1fr!important}.netbilet-screen-home .footer-content>div:first-child{grid-column:auto}
+  .netbilet-screen-home .section-header{gap:12px;align-items:flex-start}.netbilet-screen-home .see-all{white-space:nowrap}
+  .netbilet-screen-profile .sidebar-menu{grid-template-columns:1fr}
+}
+
+@media(prefers-reduced-motion:reduce){
+  .netbilet-reference-page *,.netbilet-reference-page *::before,.netbilet-reference-page *::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+}

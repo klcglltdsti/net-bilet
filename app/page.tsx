@@ -1,105 +1,71 @@
 "use client";
 
-import { useState } from "react";
-import { turkishCities } from "./data/cities";
+import { useEffect, useRef, useState, type MouseEvent } from "react";
+import { Bell, Building2, ChevronRight, Clock, Gift, Heart, Headphones, MapPin, Search, Sparkles, Ticket, User, UsersRound } from "lucide-react";
 import { navigateTo } from "../src/router";
+import { useReferenceTheme } from "./reference/use-reference-theme";
+import { turkishCities } from "./data/cities";
 
-const stories = [
-  { name: "Mesut Süre", tone: "story-orange", initials: "MS", live: true, href:"/artist/mesut-sure" },
-  { name: "IF Ankara", tone: "story-purple", initials: "IF", href:"/discover" },
-  { name: "Zorlu PSM", tone: "story-pink", initials: "ZP", href:"/discover" },
-  { name: "BKM", tone: "story-coral", initials: "BK", href:"/company/bkm" },
-  { name: "Mabel Matiz", tone: "story-indigo", initials: "MM", href:"/event/mabel-matiz-fatih-turnesi" },
-  { name: "CerModern", tone: "story-gold", initials: "CM", href:"/event/cermodern-gece-sergisi" },
+type CategoryCardProps = { title: string; img: string; animationClass: string };
+type HomeEvent = { title:string; image:string; category:string; day:string; month:string; location:string; time:string; price:string; href:string; status?:string };
+
+const campaignSlides = [
+  { title:"%20 Yaz İndirimi Başladı!", description:"Seçili açık hava konserlerinde geçerli kampanya seni bekliyor.", image:"https://images.unsplash.com/photo-1533174000228-db624c979bf3?auto=format&fit=crop&q=80&w=1200", color1:"rgba(139,92,246,.85)", color2:"rgba(249,115,22,.75)" },
+  { title:"Tiyatro Severlere Müjde", description:"Tüm şehir tiyatrolarında 1 alana 1 bedava kampanyası.", image:"https://picsum.photos/seed/tiyatroslider/1200/400", color1:"rgba(16,185,129,.85)", color2:"rgba(59,130,246,.75)" },
+  { title:"Stand-up Geceleri Başlıyor", description:"En sevdiğin komedyenleri en ön sıradan izleme fırsatı.", image:"https://picsum.photos/seed/standupslider/1200/400", color1:"rgba(236,72,153,.85)", color2:"rgba(234,179,8,.75)" },
 ];
 
-const events = [
-  { slug: "mesut-sure-iliski-testi", title: "Mesut Süre ile İlişki Testi", type: "STAND-UP", day: "12", month: "EYL", place: "Milyon Performance Hall", city: "Ankara", price: "450 TL", score: "%92 uyum", art: "art-standup", mark: "GÜLMEK\nSERBEST" },
-  { slug: "mabel-matiz-fatih-turnesi", title: "Mabel Matiz — Fatih Turnesi", type: "KONSER", day: "21", month: "EYL", place: "ODTÜ Vişnelik", city: "Ankara", price: "890 TL", score: "Trend #1", art: "art-concert", mark: "SESİ\nTAKİP ET" },
-  { slug: "bir-delinin-hatira-defteri", title: "Bir Delinin Hatıra Defteri", type: "TİYATRO", day: "28", month: "EYL", place: "CSO Ada", city: "Ankara", price: "600 TL", score: "%86 uyum", art: "art-theatre", mark: "PERDE\nAÇILIYOR" },
+const popularEvents: HomeEvent[] = [
+  { title:"Yaz Akşamı Konserleri", image:"https://picsum.photos/seed/populer1/600/400", category:"Konser", status:"Son Biletler", day:"15", month:"AĞU", location:"Harbiye, İstanbul", time:"21:00", price:"250 ₺'den başlayan fiyatlarla", href:"/event/mabel-matiz-fatih-turnesi" },
+  { title:"Bir Delinin Hatıra Defteri", image:"https://picsum.photos/seed/populer2/600/400", category:"Tiyatro", status:"Satışta", day:"18", month:"AĞU", location:"Zorlu PSM, İstanbul", time:"20:30", price:"180 ₺'den başlayan fiyatlarla", href:"/event/bir-delinin-hatira-defteri" },
+  { title:"Açık Mikrofon Gecesi", image:"https://picsum.photos/seed/populer3/600/400", category:"Stand-up", day:"20", month:"AĞU", location:"BKM Mutfak, İstanbul", time:"22:00", price:"150 ₺'den başlayan fiyatlarla", href:"/event/mesut-sure-iliski-testi" },
+];
+const weekendEvents: HomeEvent[] = [
+  { title:"Elektronik Müzik Festivali", image:"https://picsum.photos/seed/haftasonu1/600/400", category:"Festival", status:"Satışta", day:"22", month:"AĞU", location:"Life Park, İstanbul", time:"14:00 - 00:00", price:"450 ₺'den başlayan fiyatlarla", href:"/event/mabel-matiz-fatih-turnesi" },
+  { title:"Alice Harikalar Diyarında", image:"https://picsum.photos/seed/haftasonu2/600/400", category:"Çocuk ve Aile", day:"23", month:"AĞU", location:"Maximum Uniq, İstanbul", time:"13:00", price:"120 ₺'den başlayan fiyatlarla", href:"/event/bir-delinin-hatira-defteri" },
+];
+const upcomingEvents: HomeEvent[] = [
+  { title:"Akustik Performanslar", image:"https://picsum.photos/seed/konser2/600/400", category:"Konser", day:"05", month:"EYL", location:"IF Performance, Ankara", time:"21:30", price:"190 ₺'den başlayan fiyatlarla", href:"/event/mabel-matiz-fatih-turnesi" },
+  { title:"Büyük Komedi Oyunu", image:"https://picsum.photos/seed/tiyatro2/600/400", category:"Tiyatro", day:"12", month:"EYL", location:"Bostanlı Suat Taşer, İzmir", time:"20:00", price:"150 ₺'den başlayan fiyatlarla", href:"/event/mesut-sure-iliski-testi" },
 ];
 
-const campaigns = [
-  {
-    eyebrow: "YAZ FIRSATI",
-    title: "%20 Yaz indirimi başladı",
-    description: "Seçili açık hava konserlerinde avantajlı biletleri kaçırma.",
-    action: "Kampanyayı keşfet",
-    href: "/discover",
-    tone: "campaign-purple",
-  },
-  {
-    eyebrow: "SAHNE SENİN",
-    title: "Tiyatroda 1 alana 1 hediye",
-    description: "Şehrin sevilen oyunlarında arkadaşınla birlikte yerini ayır.",
-    action: "Oyunları gör",
-    href: "/discover",
-    tone: "campaign-orange",
-  },
-  {
-    eyebrow: "BU HAFTA SONU",
-    title: "Stand-up geceleri başlıyor",
-    description: "Yeni nesil komedyenleri en ön sıradan keşfet.",
-    action: "Biletleri incele",
-    href: "/discover",
-    tone: "campaign-pink",
-  },
-];
-
-export default function Home() {
-  const [category,setCategory]=useState("Tümü"); const [query,setQuery]=useState(""); const [city,setCity]=useState("Ankara"); const [favorites,setFavorites]=useState<string[]>([]); const [campaignIndex,setCampaignIndex]=useState(0);
-  const campaign=campaigns[campaignIndex];
-  const visibleEvents=events.filter(event=>(category==="Tümü"||event.type.toLocaleLowerCase("tr-TR")===category.toLocaleLowerCase("tr-TR"))&&`${event.title} ${event.place}`.toLocaleLowerCase("tr-TR").includes(query.toLocaleLowerCase("tr-TR")));
-  return (
-    <main className="app-shell">
-      <header className="topbar">
-        <a className="brand" href="#top" aria-label="Buluş ana sayfa"><span className="brand-dot">b</span><span>BULUŞ</span></a>
-        <nav className="desktop-nav" aria-label="Ana menü"><a className="active" href="/discover">Keşfet</a><a href="/ne-yapayim">Ne Yapayım?</a><a href="#etkinlikler">Etkinlikler</a><a href="/organizer">Organizatör</a></nav>
-        <div className="top-actions"><label className="city-picker"><span>●</span><select value={city} onChange={event=>{setCity(event.target.value);if(event.target.value!=="Ankara")navigateTo("/discover")}} aria-label="Şehir seç">{turkishCities.map(item=><option key={item}>{item}</option>)}</select></label><a className="icon-button" href="/notifications" aria-label="Bildirimler">♢<i /></a><a className="profile-button" href="/profile" aria-label="Profil">AY</a></div>
-      </header>
-
-      <section className="hero" id="top">
-        <div className="hero-copy">
-          <span className="eyebrow">✦ 2026 ETKİNLİK SEZONU</span>
-          <h1>Plan arama.<br /><em>Keşfet ve yaşa.</em></h1>
-          <p>Şehrindeki en iyi etkinlikleri keşfet, arkadaşlarınla paylaş ve unutamayacağın anlarda yerini ayırt.</p>
-          <form className="search-box" onSubmit={event=>{event.preventDefault();document.getElementById("etkinlikler")?.scrollIntoView({behavior:"smooth"})}}><span aria-hidden="true">⌕</span><input value={query} onChange={event=>setQuery(event.target.value)} aria-label="Etkinlik ara" placeholder="Etkinlik, sanatçı veya mekan ara" /><button type="submit">Ara</button></form>
-          <div className="quick-tags" aria-label="Popüler aramalar"><span>Popüler:</span><a href="#etkinlikler">Stand-up</a><a href="#etkinlikler">Konser</a><a href="#etkinlikler">Bu hafta sonu</a></div>
-        </div>
-
-        <div className="hero-poster" aria-label="Öne çıkan etkinlik Mesut Süre">
-          <div className="poster-orbit orbit-one" /><div className="poster-orbit orbit-two" />
-          <div className="poster-date"><strong>12</strong><span>EYL</span></div><div className="poster-type">STAND-UP · ANKARA</div>
-          <div className="poster-title">İLİŞKİ<br /><span>TESTİ</span></div><div className="poster-person">MESUT SÜRE</div>
-          <a className="poster-cta" href="/event/mesut-sure-iliski-testi">Biletleri gör <span>↗</span></a><div className="poster-stamp">SON<br />100<br />BİLET</div>
-        </div>
-      </section>
-
-      <section className="stories-section" id="kesfet">
-        <div className="section-heading compact-heading"><div><span className="section-kicker">CANLI AKIŞ</span><h2>Şu an neler oluyor?</h2></div><a href="#etkinlikler">Tümünü gör <span>→</span></a></div>
-        <div className="stories-row">{stories.map((story) => <a className="story" href={story.href} key={story.name}><span className={`story-ring ${story.tone}`}><b>{story.initials}</b></span><span className="story-name">{story.name}</span>{story.live && <small>YENİ</small>}</a>)}</div>
-      </section>
-
-      <section className={`campaign-showcase ${campaign.tone}`} aria-label="Güncel kampanyalar">
-        <div className="campaign-copy"><span>{campaign.eyebrow}</span><h2>{campaign.title}</h2><p>{campaign.description}</p><a href={campaign.href}>{campaign.action} <b>→</b></a></div>
-        <div className="campaign-art" aria-hidden="true"><span>BULUŞ</span><strong>{campaignIndex === 0 ? "%20" : campaignIndex === 1 ? "1+1" : "HA!"}</strong><i>ŞEHRİN<br />SAHNEDE</i></div>
-        <div className="campaign-controls" aria-label="Kampanya seçimi">{campaigns.map((item,index)=><button type="button" key={item.title} className={index===campaignIndex?"active":""} onClick={()=>setCampaignIndex(index)} aria-label={`${index+1}. kampanyayı göster`} />)}</div>
-      </section>
-
-      <section className="recommendation" id="neyapayim">
-        <div className="recommendation-copy"><span className="ai-badge">✦ AKILLI ÖNERİ</span><h2>Ne yapacağına<br />karar veremedin mi?</h2><p>Modunu, bütçeni ve zamanını seç. Sana en uygun etkinliği saniyeler içinde bulalım.</p><a className="primary-button" href="/ne-yapayim"><span>🎲</span> Bana bir şey öner <b>→</b></a></div>
-        <div className="slot-card" aria-label="Ne Yapayım öneri örneği"><div className="slot-top"><span>BUGÜNÜN MODU</span><b>•••</b></div><div className="slot-reels"><div><small>MOD</small><strong>😄</strong><span>Eğlenceli</span></div><div><small>KİMLE</small><strong>👥</strong><span>Arkadaşlarla</span></div><div><small>BÜTÇE</small><strong>₺</strong><span>300–750</span></div></div><div className="slot-result"><span>✦</span><p><small>SENİN İÇİN</small><strong>%92 eşleşme bulduk</strong></p><b>↗</b></div></div>
-      </section>
-
-      <section className="events-section" id="etkinlikler">
-        <div className="section-heading"><div><span className="section-kicker">SANA ÖZEL</span><h2>Bu hafta şehirde</h2></div><div className="filters" aria-label="Etkinlik filtreleri">{["Tümü","Konser","Stand-up","Tiyatro"].map(item=><button className={category===item?"selected":""} onClick={()=>setCategory(item)} type="button" key={item}>{item}</button>)}</div></div>
-        {visibleEvents.length?<div className="event-grid">{visibleEvents.map((event) => <article className="event-card" key={event.title}><div className={`event-art ${event.art}`}><span className="event-type">{event.type}</span><button className={`heart ${favorites.includes(event.slug)?"liked":""}`} onClick={()=>setFavorites(current=>current.includes(event.slug)?current.filter(item=>item!==event.slug):[...current,event.slug])} type="button" aria-label={`${event.title} favorilere ekle`}>{favorites.includes(event.slug)?"♥":"♡"}</button><strong>{event.mark.split("\n").map((line) => <span key={line}>{line}</span>)}</strong><i>{event.score}</i></div><div className="event-info"><div className="date-box"><strong>{event.day}</strong><span>{event.month}</span></div><div className="event-details"><h3>{event.title}</h3><p>{event.place} · {event.city}</p><span>{event.price}'den başlayan</span></div><a href={`/event/${event.slug}`} aria-label={`${event.title} detayları`}>↗</a></div></article>)}</div>:<div className="guided-empty"><span>⌕</span><h3>Aramana uygun etkinlik yok</h3><p>Arama metnini temizleyebilir veya farklı bir kategori seçebilirsin.</p><button type="button" onClick={()=>{setQuery("");setCategory("Tümü")}}>Aramayı temizle</button></div>}
-        <a className="all-events" href="/discover">Tüm etkinlikleri keşfet <span>→</span></a>
-      </section>
-
-      <footer className="site-footer"><div><a className="brand" href="/"><span className="brand-dot">b</span><span>BULUŞ</span></a><p>Şehrindeki hayatı keşfet.</p></div><nav><strong>KEŞFET</strong><a href="/discover">Etkinlikler</a><a href="/ne-yapayim">Ne Yapayım?</a><a href="/match">Yalnız Gitme</a><a href="/rewards">Ödüller</a></nav><nav><strong>HESAP</strong><a href="/tickets">Biletlerim</a><a href="/profile">Profil</a><a href="/auth/login">Giriş yap</a><a href="/support">Yardım</a></nav><nav><strong>İŞ ORTAKLARI</strong><a href="/organizer">Organizatör paneli</a><a href="/company/bkm">Organizatör profili</a><a href="/admin">Yönetim paneli</a></nav><div className="footer-note">© 2026 BULUŞ · KVKK · Gizlilik · Koşullar</div></footer>
-
-      <nav className="mobile-nav" aria-label="Mobil menü"><a className="active" href="/"><span>⌂</span>Ana Sayfa</a><a href="/discover"><span>⌕</span>Keşfet</a><a className="mobile-game" href="/ne-yapayim"><span>✦</span>Ne Yapayım?</a><a href="/tickets"><span>▣</span>Biletlerim</a><a href="/profile"><span>○</span>Profil</a></nav>
-    </main>
-  );
+function CategoryCard({ title, img, animationClass }: CategoryCardProps) {
+  return <a href="/discover" className={`category-float-link ${animationClass}`}><div className="float-card glass-panel"><img src={img} alt={title}/><div className="card-info"><h4>{title}</h4></div></div></a>;
 }
+
+function EventCard({event}:{event:HomeEvent}){
+  const [favorite,setFavorite]=useState(false);const open=()=>navigateTo(event.href);
+  return <article className="event-card glass-panel"><div className="event-image"><img src={event.image} alt={event.title}/><div className="event-badges"><span className="category-badge">{event.category}</span>{event.status&&<span className={`status-badge ${event.status==="Satışta"?"status-success":"status-warning"}`}>{event.status}</span>}</div><button className="favorite-btn" type="button" aria-label="Favoriye ekle" onClick={()=>setFavorite(value=>!value)}><Heart size={20} fill={favorite?"currentColor":"none"}/></button><div className="event-date"><span className="day">{event.day}</span><span className="month">{event.month}</span></div></div><div className="event-info"><h3>{event.title}</h3><div className="event-meta-info"><p className="event-location"><MapPin size={16}/>{event.location}</p><p className="event-time"><Clock size={16}/>{event.time}</p></div><div className="event-footer"><span className="event-price">{event.price}</span><button className="btn-primary btn-sm" type="button" onClick={open}>Bilet Al</button></div></div></article>;
+}
+
+export default function Home(){
+  useReferenceTheme("home");
+  const [mousePos,setMousePos]=useState({x:0,y:0});const [currentSlide,setCurrentSlide]=useState(0);const [showSuggestions,setShowSuggestions]=useState(false);const [query,setQuery]=useState("");const [city,setCity]=useState("İstanbul");const [storeNotice,setStoreNotice]=useState("");const heroRef=useRef<HTMLElement>(null);
+  useEffect(()=>{const timer=window.setInterval(()=>setCurrentSlide(current=>(current+1)%campaignSlides.length),5000);return()=>window.clearInterval(timer)},[]);
+  const moveGlow=(event:MouseEvent<HTMLElement>)=>{if(!heroRef.current)return;const rect=heroRef.current.getBoundingClientRect();setMousePos({x:event.clientX-rect.left,y:event.clientY-rect.top})};
+  const search=(event:MouseEvent<HTMLButtonElement>)=>{event.preventDefault();navigateTo(`/discover?query=${encodeURIComponent(query)}&city=${encodeURIComponent(city)}`)};const campaign=campaignSlides[currentSlide];
+  return <div className="app-container">
+    <nav className="navbar glass-panel"><div className="navbar-left"><a className="logo" href="/"><span className="logo-icon">🎟️</span><span className="logo-text">Net<span className="text-primary">Bilet</span></span></a></div><div className="nav-links desktop-only"><a className="active" href="/">Ana Sayfa</a><a href="/discover">Etkinlikler</a><a href="/ne-yapayim">Ne Yapayım?</a><a href="/match">Yalnız Gitme</a><a href="#kampanyalar">Kampanyalar</a></div><div className="nav-actions desktop-only"><a className="btn-icon nav-notification" href="/notifications" title="Bildirimler"><Bell size={20}/><i/></a><a className="btn-icon" href="/profile" title="Favorilerim"><Heart size={20}/></a><a className="btn-outline reference-link-button" href="/tickets">Biletlerim</a><a className="btn-primary reference-link-button nav-login" href="/auth/login"><User size={18}/>Giriş Yap</a></div></nav>
+    <section className="hero-section" ref={heroRef} onMouseMove={moveGlow}><div className="mouse-glow" style={{background:`radial-gradient(600px circle at ${mousePos.x}px ${mousePos.y}px,rgba(139,92,246,.12),transparent 40%)`}}/><div className="hero-content"><div className="badge glass-panel">✨ 2026 Etkinlik Sezonu Başladı</div><h1 className="hero-title">En İyi Etkinlikleri <br/><span className="text-gradient">Keşfet ve Yaşa</span></h1><p className="hero-subtitle">Şehrindeki etkinlikleri keşfet, koltuğunu seç ve demo bilet deneyimini baştan sona test et.</p><div className="search-bar glass-panel"><div className="search-input-group search-main-input"><Search className="search-icon" size={20}/><input value={query} onChange={event=>setQuery(event.target.value)} placeholder="Sanatçı, etkinlik veya mekan ara..." onFocus={()=>setShowSuggestions(true)} onBlur={()=>window.setTimeout(()=>setShowSuggestions(false),200)}/></div><div className="divider"/><label className="search-input-group city-search"><MapPin className="search-icon" size={20}/><select value={city} onChange={event=>setCity(event.target.value)} aria-label="Şehir seç">{turkishCities.map(item=><option key={item}>{item}</option>)}</select></label><button className="btn-primary search-btn" type="button" onClick={search}>Bilet Bul <ChevronRight size={18}/></button>{showSuggestions&&<div className="autocomplete-dropdown glass-panel"><div><h4>Son Aramalar</h4><ul><li><a href="/venue/milyon-performance-hall"><Clock size={16}/>Zorlu PSM</a></li><li><a href="/discover"><Clock size={16}/>Tiyatro biletleri</a></li></ul></div><div><h4>Popüler Aramalar</h4><ul><li><a href="/event/mabel-matiz-fatih-turnesi"><Search size={14}/>Tarkan Konseri</a></li><li><a href="/event/mesut-sure-iliski-testi"><Search size={14}/>Cem Yılmaz Stand-up</a></li></ul></div></div>}</div><div className="trending-tags"><span>Popüler Aramalar:</span>{["Tarkan Konseri","Cem Yılmaz","Harbiye Açık Hava","Rock Festivali"].map(item=><a href="/discover" className="badge glass-panel" key={item}>{item}</a>)}</div><div className="app-downloads" id="mobil-uygulama"><button className="store-btn apple-btn" type="button" onClick={()=>setStoreNotice("App Store demo bağlantısı yakında açılacak.")}><span className="store-icon">●</span><span className="store-text"><small className="store-subtitle">App Store&apos;dan</small><strong className="store-title">İndirin</strong></span></button><button className="store-btn play-btn" type="button" onClick={()=>setStoreNotice("Google Play demo bağlantısı yakında açılacak.")}><span className="store-icon">▶</span><span className="store-text"><small className="store-subtitle">Google Play&apos;den</small><strong className="store-title">Alın</strong></span></button></div>{storeNotice&&<p className="reference-notice">{storeNotice}</p>}</div><div className="floating-cards"><CategoryCard title="Konser" img="https://picsum.photos/seed/konser/400/300" animationClass="anim-float-1"/><CategoryCard title="Tiyatro" img="https://picsum.photos/seed/tiyatro/400/300" animationClass="anim-float-2"/><CategoryCard title="Festival" img="https://picsum.photos/seed/festival/400/300" animationClass="anim-float-3"/><CategoryCard title="Stand-up" img="https://picsum.photos/seed/standup/400/300" animationClass="anim-float-4"/><CategoryCard title="Çocuk" img="https://picsum.photos/seed/cocuk/400/300" animationClass="anim-float-3"/><CategoryCard title="Müzikal" img="https://picsum.photos/seed/muzikal/400/300" animationClass="anim-float-1"/></div></section>
+    <section className="campaign-banner-section" id="kampanyalar"><div className="campaign-banner glass-panel" style={{background:`linear-gradient(135deg,${campaign.color1},${campaign.color2}),url('${campaign.image}') center/cover`}}><div className="campaign-content"><h2>{campaign.title}</h2><p>{campaign.description}</p></div><a className="btn-primary btn-large reference-link-button" href="/discover">Fırsatı Yakala <ChevronRight size={20}/></a><div className="slider-dots" style={{position:"absolute",bottom:24,left:"50%",transform:"translateX(-50%)",display:"flex",gap:8}}>{campaignSlides.map((slide,index)=><button key={slide.title} onClick={()=>setCurrentSlide(index)} aria-label={`${index+1}. kampanya`} style={{width:index===currentSlide?32:10,height:10,borderRadius:10,background:index===currentSlide?"#fff":"rgba(255,255,255,.4)",border:0,cursor:"pointer"}}/>)}</div></div></section>
+    <SmartExperience/>
+    <EventSection title="Bu Şehirde Popüler Etkinlikler" events={popularEvents} horizontal/><EventSection title="Bu Hafta Sonu" events={weekendEvents} horizontal/><EventSection title="Yaklaşan Etkinlikler" events={upcomingEvents}/>
+    <ExperienceHub/>
+    <footer className="footer glass-panel" style={{marginTop:80,borderRadius:"40px 40px 0 0",borderBottom:"none"}}><div className="footer-content" style={{padding:"60px 10%",display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(200px,1fr))",gap:40}}><div className="footer-col"><a className="logo" href="/"><span>🎟️</span><span>Net<span className="text-primary">Bilet</span></span></a><p>Türkiye&apos;nin modern ve kullanıcı dostu etkinlik biletleme platformu.</p></div><FooterLinks title="Kategoriler" links={[["Konser","/discover"],["Tiyatro","/discover"],["Festival","/discover"],["Stand-up","/discover"]]}/><FooterLinks title="Kurumsal" links={[["Yardım Merkezi","/support"],["Organizatör Paneli","/organizer"],["Yönetim Paneli","/admin"],["Biletlerim","/tickets"]]}/><div className="footer-col"><h4>Bizi Takip Edin</h4><p>En yeni etkinliklerden ve fırsatlardan anında haberdar olun.</p><div className="social-links">📸 🐦 📘</div></div></div><div className="footer-bottom" style={{padding:"24px 10%",borderTop:"1px solid var(--glass-border)",display:"flex",justifyContent:"space-between",color:"var(--text-muted)",fontSize:".9rem"}}><span>© 2026 NetBilet. Tüm hakları saklıdır.</span><span>Demo güvenli ödeme altyapısı 🔒</span></div></footer>
+    <div className="mobile-bottom-nav glass-panel"><a href="/" className="nav-item active"><span>⌂</span>Ana Sayfa</a><a href="/discover" className="nav-item"><span>◉</span>Keşfet</a><a href="/discover" className="nav-item"><Search size={24}/>Ara</a><a href="/tickets" className="nav-item"><Ticket size={24}/>Biletlerim</a><a href="/profile" className="nav-item"><User size={24}/>Profil</a></div>
+  </div>;
+}
+
+function EventSection({title,events,horizontal=false}:{title:string;events:HomeEvent[];horizontal?:boolean}){return <section className="events-section"><div className="section-header"><h2>{title}</h2><a className="see-all" href="/discover">Tümünü Gör</a></div><div className={horizontal?"horizontal-scroll-container":"events-grid"}>{events.map(event=><EventCard event={event} key={event.title}/>)}</div></section>}
+function FooterLinks({title,links}:{title:string;links:string[][]}){return <div className="footer-col"><h4>{title}</h4><ul>{links.map(([label,href])=><li key={label}><a href={href}>{label}</a></li>)}</ul></div>}
+
+function SmartExperience(){return <section className="smart-experience"><div className="smart-copy"><span><Sparkles size={16}/> AKILLI ÖNERİ</span><h2>Ne yapacağına<br/>karar veremedin mi?</h2><p>Modunu, bütçeni ve zamanını seç. Sana en uygun etkinliği saniyeler içinde bulalım.</p><a className="btn-primary reference-link-button" href="/ne-yapayim">Bana bir şey öner <ChevronRight size={19}/></a></div><div className="match-preview glass-panel"><small>BUGÜNÜN MODU</small><div className="match-options-preview"><div><b>😄</b><span>MOD</span><strong>Eğlenceli</strong></div><div><b>👥</b><span>KİMLE</span><strong>Arkadaşlarla</strong></div><div><b>₺</b><span>BÜTÇE</span><strong>300–750</strong></div></div><a href="/ne-yapayim"><Sparkles size={20}/><span><small>SENİN İÇİN</small><strong>%92 eşleşme bulduk</strong></span><ChevronRight size={20}/></a></div></section>}
+
+function ExperienceHub(){const items=[
+  {icon:<UsersRound/>,title:"Yalnız Gitme",text:"Aynı etkinliğe ilgi duyan demo profillerle eşleş.",href:"/match",tone:"purple"},
+  {icon:<Gift/>,title:"Ödül Çarkı",text:"Puan kazan, çarkı çevir ve demo kuponunu kullan.",href:"/rewards",tone:"orange"},
+  {icon:<Bell/>,title:"Bildirim Merkezi",text:"Bilet, kampanya ve sosyal gelişmeleri tek yerde gör.",href:"/notifications",tone:"pink"},
+  {icon:<Ticket/>,title:"Dijital Biletler",text:"QR biletini aç, bilet devri ve iade akışlarını dene.",href:"/tickets",tone:"blue"},
+  {icon:<Building2/>,title:"Organizatör Ol",text:"Etkinlik oluştur, satışları ve kampanyaları yönet.",href:"/organizer",tone:"green"},
+  {icon:<Headphones/>,title:"Destek Merkezi",text:"Demo talebi oluştur ve yönetim panelinden takip et.",href:"/support",tone:"violet"},
+];return <section className="experience-hub"><div className="section-header"><div><span className="hub-kicker">NETBİLET DENEYİMİ</span><h2>Bilet almaktan çok daha fazlası</h2></div><a className="see-all" href="/profile">Profilini aç</a></div><div className="experience-grid">{items.map(item=><a className={`experience-card glass-panel ${item.tone}`} href={item.href} key={item.title}><i>{item.icon}</i><div><h3>{item.title}</h3><p>{item.text}</p></div><ChevronRight className="experience-arrow"/></a>)}</div></section>}

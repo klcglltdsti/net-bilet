@@ -1,0 +1,132 @@
+.profile-page {
+  min-height: 100vh;
+  background: var(--bg-dark);
+}
+
+.profile-hero {
+  position: relative;
+  height: 450px;
+  display: flex;
+  align-items: flex-end;
+  padding: 0 10% 60px 10%;
+}
+
+.profile-hero-bg {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-size: cover;
+  background-position: center;
+  z-index: 0;
+}
+.profile-hero-bg::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: linear-gradient(to top, rgba(18, 11, 28, 1) 0%, rgba(18, 11, 28, 0.8) 50%, transparent 100%);
+}
+
+.profile-hero-content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  gap: 40px;
+  align-items: flex-end;
+  width: 100%;
+}
+
+.profile-avatar {
+  flex-shrink: 0;
+}
+.profile-avatar img {
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  border: 6px solid var(--bg-dark);
+  object-fit: cover;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+}
+
+.profile-info {
+  flex: 1;
+}
+
+.profile-title {
+  font-size: 4rem;
+  font-weight: 800;
+  color: #fff;
+  margin-bottom: 16px;
+  line-height: 1;
+}
+
+.profile-bio {
+  font-size: 1.1rem;
+  color: rgba(255,255,255,0.8);
+  max-width: 800px;
+  line-height: 1.6;
+  margin-bottom: 24px;
+}
+
+.profile-social {
+  display: flex;
+  gap: 16px;
+}
+
+.social-btn {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid var(--glass-border);
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.social-btn:hover {
+  background: var(--primary);
+  border-color: var(--primary);
+}
+
+.artist-mini-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 24px;
+  border-radius: 24px;
+  min-width: 200px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.artist-mini-card:hover {
+  background: rgba(255,255,255,0.05);
+  transform: translateY(-5px);
+}
+.artist-mini-card img {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 16px;
+}
+.artist-mini-card h4 {
+  font-size: 1.1rem;
+  margin-bottom: 4px;
+  color: var(--text-main);
+}
+.artist-mini-card p {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+@media (max-width: 992px) {
+  .profile-hero-content {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  .profile-social {
+    justify-content: center;
+  }
+}

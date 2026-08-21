@@ -63,15 +63,32 @@ test("81 şehir ve tarayıcı içi API simülasyonu korunur", async () => {
   assert.match(api, /\/api\/v1\/tickets\/verify/);
 });
 
-test("hibrit NetBilet tasarım dili ana sayfaya uygulanır", async () => {
-  const [home, theme, entry] = await Promise.all([
+test("kullanıcının NetBilet ekranları çalışan rotalara bağlanır", async () => {
+  const [home, baseTheme, homeTheme, responsiveTheme, themeHook, router, checkout] = await Promise.all([
     readFile(new URL("app/page.tsx", root), "utf8"),
-    readFile(new URL("app/hybrid-theme.css", root), "utf8"),
-    readFile(new URL("src/main.tsx", root), "utf8"),
+    readFile(new URL("app/netbilet-base.css", root), "utf8"),
+    readFile(new URL("app/netbilet-home.css", root), "utf8"),
+    readFile(new URL("app/reference/responsive.css", root), "utf8"),
+    readFile(new URL("app/reference/use-reference-theme.ts", root), "utf8"),
+    readFile(new URL("src/App.tsx", root), "utf8"),
+    readFile(new URL("app/reference/Checkout.tsx", root), "utf8"),
   ]);
-  assert.match(home, /campaign-showcase/);
-  assert.match(home, /Keşfet ve yaşa/);
-  assert.match(theme, /#120b1c/);
-  assert.match(theme, /"Outfit"/);
-  assert.match(entry, /hybrid-theme\.css/);
+  assert.match(home, /En İyi Etkinlikleri/);
+  assert.match(home, /campaign-banner/);
+  assert.match(baseTheme, /#120b1c/);
+  assert.match(homeTheme, /floating-cards/);
+  assert.match(home, /SmartExperience/);
+  assert.match(home, /ExperienceHub/);
+  assert.match(home, /\/match/);
+  assert.match(home, /\/rewards/);
+  assert.match(responsiveTheme, /max-width:720px/);
+  assert.match(themeHook, /screenCss/);
+  assert.match(router, /ReferenceEventDetail/);
+  assert.match(router, /ReferenceArtistProfile/);
+  assert.match(router, /ReferenceVenueProfile/);
+  assert.match(router, /ReferenceProfile/);
+  assert.match(checkout, /recordDemoSale/);
+  assert.match(checkout, /Reddedilen ödeme/);
+  assert.match(checkout, /NET20/);
+  assert.match(checkout, /installments/);
 });

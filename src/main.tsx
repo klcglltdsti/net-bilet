@@ -6,7 +6,6 @@ import "../app/product-extra.css";
 import "../app/panel.css";
 import "../app/demo.css";
 import "../app/readability.css";
-import "../app/hybrid-theme.css";
 import { App } from "./App";
 import { installDemoApi } from "./demo-api";
 
